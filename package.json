@@ -1,0 +1,34 @@
+{
+  "name": "tryfeature",
+  "version": "0.0.1",
+  "author": "Thomas Brillion",
+  "main": "dist/index.cjs",
+  "module": "dist/index.mjs",
+  "exports": {
+    "import": "./dist/index.mjs",
+    "require": "./dist/index.cjs"
+  },
+  "keywords": [
+    "feature",
+    "usage",
+    "consumption",
+    "ability",
+    "feature group"
+  ],
+  "license": "MIT",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "test": "vitest"
+  },
+  "devDependencies": {
+    "sqlite3": "^5.1.7",
+    "typescript": "~5.7.2",
+    "vite": "^6.1.0",
+    "vitest": "^3.0.5"
+  },
+  "dependencies": {
+    "sutando": "^1.7.1"
+  }
+}
