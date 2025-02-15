@@ -17,20 +17,11 @@ TryFeature is an easy-to-use library for managing users and their associated fea
 
 - [Features](#-features)
 - [How it works](#-how-it-works)
-- [Installation](#installation)
-- [API Reference](#api-reference)
-  - [Migration](#migration)
-  - [User](#user)
-    - [User Creation](#user-creation)
-    - [Granting Features](#granting-features)
-    - [Revoking & Checking Features](#revoking--checking-features)
-  - [Feature](#feature)
-  - [FeatureGroup](#featuregroup)
-  - [FeatureType](#featuretype)
-- [Error Handling](#error-handling)
-- [Running Tests](#running-tests)
-- [Contributing](#contributing)
-- [License](#license)
+- [Installation](#-installation)
+- [Getting Started](#-getting-started)
+- [Usage](#-usage)
+- [License](#-license)
+- [Support](#-show-your-support)
 
 ## ✨ Features
 

@@ -1,7 +1,8 @@
 {
   "name": "tryfeature",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "author": "Thomas Brillion",
+  "description": "easy-to-use library for managing users and their associated features",
   "main": "src/index.js",
   "type": "module",
   "keywords": [
