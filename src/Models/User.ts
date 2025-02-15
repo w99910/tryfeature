@@ -134,7 +134,7 @@ class User extends Model {
                     throw new Error('Please specify amount to consume usage');
                 }
                 const consumptions: Consumption[] = [];
-                const usages = await (this as User).related('usages').where('name', feature.name).where('expired_at', '>', date).get();
+                const usages = await (this as User).related('usages').where('name', feature.name).where('expired_at', '>', date).orderBy('expired_at', 'asc').get();
                 if (usages.items.length === 0) {
                     if (dry) {
                         return false;

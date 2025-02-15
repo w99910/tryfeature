@@ -49,8 +49,227 @@ TryFeature is an easy-to-use library for managing users and their associated fea
 
 ## 🤔 How it works
 
+![Flowchart](flowchart.png)
 
+## 🔌 Installation
+
+```bash
+npm i tryfeature
+# or
+pnpm i tryfeature
+# or
+yarn add tryfeature
+```
+
+## 👋 Getting started
+
+- ### Migration
+
+Before we get started, we need to migrate required tables first. 
+
+  - **Connection**: Since [sutando](https://sutando.org/) is used under the hood, we need to setup database connection first. Please consult [its documentation page](https://sutando.org/guide/installation.html) for more details.
+
+```js
+// Example
+import { sutando } from 'sutando';
+
+sutando.addConnection({
+    client: 'sqlite3',
+    connection: {
+        filename: ":memory:"
+    },
+    useNullAsDefault: true,
+});
+```
+
+- **Migrate Tables**: In order to save time, you can use migration helper function `migrate` of each models. You can pass `prefix` for the table in case there is already existing table. 
+
+```js
+// set up connection
+// ...
+// migrate
+const prefix = ''
+await User.migrate(prefix);
+await Feature.migrate(prefix);
+await Ability.migrate(prefix);
+await FeatureGroup.migrate(prefix);
+await Usage.migrate(prefix);
+await Consumption.migrate(prefix);
+```
+
+> By default, `migrate` function checks if there is already existing table. If exists, it skips the migraiton. Pass `false` as second parameter in `migrate` function such as 
+```js
+const skipOnExist = false;
+await User.migrate('', skipOnExist)
+```
+
+- ### User Model
+
+By default, User model has the following schema structure. In order to add more columns, please extend the model and add more columns in `migrate` function.
+
+```js
+table.increments('id').primary();
+table.string('email').unique();
+table.timestamps();
+```
+
+To create an user, you can use `User.firstOrCreate` async function. 
+
+```js
+import { User } from 'tryfeature';
+
+const email = 'johndoe@example.com'
+
+const user = await User.firstOrCreate(email);
+```
+
+- ### Feature Model
+
+Schema structure:
+
+```js
+table.increments('id').primary();
+table.string('name').unique();
+table.enum('type', ['ability', 'usage']);
+table.text('description').nullable();
+table.bigInteger('quantity').nullable();
+table.timestamps();
+```
+
+To create a feature, you can use `Feature.firstOrCreate`. It has four parameters.
+```js
+Feature.firstOrCreate(name: string, type: FeatureType, quantity?: number, description?: string)
+``` 
+
+```js
+// Examples
+import { Feature, FeatureType } from 'tryfeature';
+
+const abilityFeature = await Feature.firstOrCreate('can-view', FeatureType.ability);
+
+const usageFeature = await Feature.firstOrCreate('api-call', FeatureType.usage, 100);
+```
+
+- ### Feature Group Model
+
+Feature and Feature Group has many-to-many relationship type. Schema structure:
+
+```js
+table.increments('id').primary();
+table.string('name').unique();
+table.text('description').nullable();
+table.timestamps();
+```
+
+To create a feature group, you can use `FeatureGroup.firstOrCreate`. It has two parameters.
+```js
+FeatureGroup.firstOrCreate(name: string, description?: string)
+``` 
+
+```js
+// Examples
+import { FeatureGroup } from 'tryfeature';
+
+const basicUser = await FeatureGroup.firstOrCreate('basic-user');
+```
+
+To add feature to feature group, you can use either `FeatureGroup.addFeature` or `FeatureGroup.addFeatures`. 
+
+```js
+import { Feature, FeatureGroup } from 'tryfeature';
+
+const feature = await Feature.query().first();
+
+await FeatureGroup.addFeature(feature);
+
+await FeatureGroup.addFeatures([feature]);
+```
+
+To remove feature from feature group, use `FeatureGroup.removeFeature`. 
+
+```js
+import { Feature, FeatureGroup } from 'tryfeature';
+
+const feature = await Feature.query().first();
+
+await FeatureGroup.removeFeature(feature);
+```
+
+## 🔎 Usage
+
+- ### Granting Feature
+
+You can grant a user to a feature by passing feature name or feature object and expire date. 
+
+```js
+import { User } from 'tryfeature';
+
+const user = await User.firstOrCreate('admin@test.com')
+
+await user.grantFeature('can-view', new Date((new Date).getTime() + 10000));
+
+await user.grantFeature('api-call', new Date((new Date).getTime() + 10000));
+```
+
+In order to grant a feature group, 
+
+```js
+import { User } from 'tryfeature';
+
+await user.grantFeatureGroup('basic-user');
+```
+
+- ### Revoking Feature
+
+Like granting feature, you can pass feature name or feature object. 
+
+```js
+import { User } from 'tryfeature';
+
+const user = await User.firstOrCreate('admin@test.com')
+
+await user.revokeFeature('can-view');
+
+await user.revokeFeatureGroup('basic-user');
+```
+
+- ### Checking if you can try feature
+
+Before you actually use feature, especially usage typed feature, you can check whether you can try feature. 
+
+```js
+import { User } from 'tryfeature';
+
+const user = await User.firstOrCreate('admin@test.com')
+
+await user.canTry('can-view'); // return boolean
+
+await user.canTry('api-call', 10); // return boolean
+```
+
+> Please pass `amount` to be consumed as second parameter for usage typed feature. 
+
+- ### Trying feature
+
+  - Ability feature: Trying the feature returns `boolean`. 
+  - Usage feature: Trying the feature returns an array of `Consumption` that are consumed. 
+
+```js
+import { User } from 'tryfeature';
+
+const user = await User.firstOrCreate('admin@test.com')
+
+await user.try('can-view'); // return boolean
+
+await user.try('api-call', 10); // return boolean
+```
+
+When multiple usage entries exist, those expiring sooner will be prioritized for consumption.
+
+## 📄 License
+
+MIT
 
 ## 💖 Show Your Support
 
-Please support me on [github](https://github.com/sponsors/w99910) if this project helped you
+Please support me on [github](https://github.com/sponsors/w99910) if this project helped you.
