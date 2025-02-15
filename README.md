@@ -13,6 +13,25 @@ TryFeature is an easy-to-use library for managing users and their associated fea
 
 > TryFeature is inspired by Laravel package called [UseIt](https://github.com/w99910/use-it), and under the hood, [sutando](https://sutando.org/) is used to interact with database. 
 
+## 📝 Table of Contents
+
+- [Features](#-features)
+- [How it works](#-how-it-works)
+- [Installation](#installation)
+- [API Reference](#api-reference)
+  - [Migration](#migration)
+  - [User](#user)
+    - [User Creation](#user-creation)
+    - [Granting Features](#granting-features)
+    - [Revoking & Checking Features](#revoking--checking-features)
+  - [Feature](#feature)
+  - [FeatureGroup](#featuregroup)
+  - [FeatureType](#featuretype)
+- [Error Handling](#error-handling)
+- [Running Tests](#running-tests)
+- [Contributing](#contributing)
+- [License](#license)
+
 ## ✨ Features
 
 ### Feature Management
@@ -49,7 +68,7 @@ TryFeature is an easy-to-use library for managing users and their associated fea
 
 ## 🤔 How it works
 
-![Flowchart](flowchart.png)
+![Flowchart](https://raw.githubusercontent.com/w99910/tryfeature/master/flowchart.png)
 
 ## 🔌 Installation
 
