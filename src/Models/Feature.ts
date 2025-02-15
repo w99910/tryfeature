@@ -19,8 +19,13 @@ export default class Feature extends Model {
 
     protected table: string = _prefix + 'features';
 
-    static async migrate(prefix = '') {
+    static async migrate(prefix = '', skipOnExist = true) {
         _prefix = prefix;
+
+        if (skipOnExist && await sutando.schema().hasTable(prefix + 'features')) {
+            return;
+        }
+
         await sutando.schema().createTable(prefix + 'features', table => {
             table.increments('id').primary();
             table.string('name').unique();

@@ -1,5 +1,5 @@
 import { expect, test } from 'vitest'
-import { User, Feature, FeatureGroup, Ability, Usage, Consumption } from '../src/index';
+import { User, Feature, FeatureGroup, Ability, Usage, Consumption, FeatureType } from '../src/index.js';
 
 export default function () {
     test('can grant ability typed feature', async () => {

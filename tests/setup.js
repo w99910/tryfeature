@@ -1,10 +1,8 @@
 import { expect, test } from 'vitest'
-import { User, Feature, FeatureGroup, Ability, Usage, Consumption } from '../src/index';
-import { FeatureType } from '../src/Models/Feature';
-
+import { User, Feature, FeatureGroup, Ability, Usage, Consumption, FeatureType } from '../src/index.js';
 export default function () {
     test('can migrate', async () => {
-        const prefix = 'thomas_brillion'
+        const prefix = ''
         await User.migrate(prefix);
         await Feature.migrate(prefix);
         await Ability.migrate(prefix);

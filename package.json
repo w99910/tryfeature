@@ -2,12 +2,8 @@
   "name": "tryfeature",
   "version": "0.0.1",
   "author": "Thomas Brillion",
-  "main": "dist/index.cjs",
-  "module": "dist/index.mjs",
-  "exports": {
-    "import": "./dist/index.mjs",
-    "require": "./dist/index.cjs"
-  },
+  "main": "src/index.js",
+  "type": "module",
   "keywords": [
     "feature",
     "usage",
@@ -23,7 +19,9 @@
     "test": "vitest"
   },
   "devDependencies": {
+    "happy-dom": "^17.1.0",
     "sqlite3": "^5.1.7",
+    "terser": "^5.39.0",
     "typescript": "~5.7.2",
     "vite": "^6.1.0",
     "vitest": "^3.0.5"

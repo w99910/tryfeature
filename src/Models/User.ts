@@ -7,7 +7,7 @@ import Consumption from "./Consumption";
 
 let _prefix = ''
 
-export default class User extends Model {
+class User extends Model {
     id!: number;
     email!: string;
     created_at!: Date;
@@ -54,7 +54,6 @@ export default class User extends Model {
                 if (error_on_duplicate && await this.canTry(feature)) {
                     throw new Error('Feature is already granted');
                 }
-
                 return await (this as User).related('abilities').create({
                     name: feature.name,
                     expired_at: expire_at,
@@ -184,3 +183,5 @@ export default class User extends Model {
         return await this.try(feature, amount, true);
     }
 }
+
+export default User;

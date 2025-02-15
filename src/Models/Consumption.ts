@@ -10,8 +10,13 @@ export default class Consumption extends Model {
 
     protected table: string = _prefix + 'consumptions';
 
-    static async migrate(prefix = '') {
+    static async migrate(prefix = '', skipOnExist = true) {
         _prefix = prefix;
+
+        if (skipOnExist && await sutando.schema().hasTable(prefix + 'consumptions')) {
+            return;
+        }
+
         await sutando.schema().createTable(prefix + 'consumptions', table => {
             table.increments('id').primary();
             table.bigInteger('usage_id').unsigned().references('id').inTable(prefix + 'usages').onDelete('cascade');
