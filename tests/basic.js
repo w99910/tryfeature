@@ -2,11 +2,10 @@ import { expect, test } from 'vitest'
 import { User, Feature, FeatureGroup, Ability, Usage, Consumption, FeatureType } from '../src/index.js';
 
 export default function () {
-    test('can grant ability typed feature', async () => {
+    test('can grant and try ability typed feature', async () => {
         const user = await User.firstOrCreate('admin@test.com')
 
         await user.grantFeature('can-view', new Date((new Date).getTime() + 10000));
-
         expect(await user.canTry('can-view')).toBeTruthy();
     });
 
@@ -18,7 +17,7 @@ export default function () {
         expect(await user.canTry('can-view')).toBeFalsy();
     });
 
-    test('can grant usage typed feature', async () => {
+    test('can grant and try usage typed feature', async () => {
         const user = await User.firstOrCreate('admin@test.com')
 
         await user.grantFeature('api-call', new Date((new Date).getTime() + 10000));

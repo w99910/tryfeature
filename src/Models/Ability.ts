@@ -20,7 +20,7 @@ export default class Ability extends Model {
 
         await sutando.schema().createTable(_prefix + 'abilities', table => {
             table.increments('id').primary();
-            table.string('name').unique();
+            table.string('name');
             table.bigInteger('user_id').unsigned().references('id').inTable(prefix + 'users').onDelete('cascade');
             table.bigInteger('spend');
             table.datetime('expired_at');

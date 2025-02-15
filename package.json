@@ -5,6 +5,7 @@
   "description": "easy-to-use library for managing users and their associated features",
   "main": "src/index.js",
   "type": "module",
+  "types": "types/index.d.ts",
   "keywords": [
     "feature",
     "usage",
@@ -23,7 +24,7 @@
     "happy-dom": "^17.1.0",
     "sqlite3": "^5.1.7",
     "terser": "^5.39.0",
-    "typescript": "~5.7.2",
+    "typescript": "~5.7.3",
     "vite": "^6.1.0",
     "vitest": "^3.0.5"
   },

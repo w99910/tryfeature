@@ -94,6 +94,8 @@ sutando.addConnection({
 
 - **Migrate Tables**: In order to save time, you can use migration helper function `migrate` of each models. You can pass `prefix` for the table in case there is already existing table. 
 
+> You can also reference [this sql file](https://raw.githubusercontent.com/w99910/tryfeature/master/migrations.sql). 
+
 ```js
 // set up connection
 // ...
