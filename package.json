@@ -1,6 +1,6 @@
 {
   "name": "tryfeature",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "author": "Thomas Brillion",
   "description": "Try Feature as Ability and Usage. Track consumptions.",
   "type": "module",
