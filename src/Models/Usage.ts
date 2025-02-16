@@ -4,13 +4,13 @@ import Consumption from "./Consumption";
 let _prefix = ''
 
 export default class Usage extends Model {
-    id!: number;
-    name!: string; // name is not unique
-    total!: number;
-    spend!: number;
-    expired_at!: Date;
-    created_at!: Date;
-    updated_at!: Date;
+    declare id: number;
+    declare name: string; // name is not unique
+    declare total: number;
+    declare spend: number;
+    declare expired_at: Date;
+    declare created_at: Date;
+    declare updated_at: Date;
 
     protected table: string = _prefix + 'usages';
 

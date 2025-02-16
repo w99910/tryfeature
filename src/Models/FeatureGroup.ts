@@ -4,11 +4,11 @@ import Feature from "./Feature";
 let _prefix = ''
 
 export default class FeatureGroup extends Model {
-    id!: number;
-    name!: string;
-    description?: string;
-    created_at!: Date;
-    updated_at!: Date;
+    declare id: number;
+    declare name: string;
+    declare description?: string;
+    declare created_at: Date;
+    declare updated_at: Date;
 
     protected table: string = _prefix + 'feature_groups';
 

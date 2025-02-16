@@ -4,6 +4,5 @@ import FeatureGroup from "./Models/FeatureGroup";
 import Ability from "./Models/Ability";
 import Usage from "./Models/Usage";
 import Consumption from "./Models/Consumption";
-import { sutando } from "sutando";
 
-export { User, Feature, FeatureGroup, Ability, Usage, Consumption, FeatureType, sutando };
+export { User, Feature, FeatureGroup, Ability, Usage, Consumption, FeatureType};

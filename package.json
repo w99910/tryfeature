@@ -1,11 +1,18 @@
 {
   "name": "tryfeature",
-  "version": "0.0.2",
+  "version": "0.0.4",
   "author": "Thomas Brillion",
-  "description": "easy-to-use library for managing users and their associated features",
-  "main": "src/index.js",
+  "description": "Try Feature as Ability and Usage. Track consumptions.",
   "type": "module",
   "types": "types/index.d.ts",
+  "main": "./dist/index.umd.cjs",
+  "module": "./dist/index.js",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.umd.cjs"
+    }
+  },
   "keywords": [
     "feature",
     "usage",
@@ -21,9 +28,7 @@
     "test": "vitest"
   },
   "devDependencies": {
-    "happy-dom": "^17.1.0",
     "sqlite3": "^5.1.7",
-    "terser": "^5.39.0",
     "typescript": "~5.7.3",
     "vite": "^6.1.0",
     "vitest": "^3.0.5"

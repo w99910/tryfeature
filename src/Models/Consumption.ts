@@ -3,10 +3,10 @@ import { Model, sutando } from "sutando";
 let _prefix = ''
 
 export default class Consumption extends Model {
-    id!: number;
-    amount!: number;
-    created_at!: Date;
-    updated_at!: Date;
+    declare id: number;
+    declare amount: number;
+    declare created_at: Date;
+    declare updated_at: Date;
 
     protected table: string = _prefix + 'consumptions';
 

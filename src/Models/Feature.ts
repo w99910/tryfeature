@@ -9,13 +9,13 @@ export enum FeatureType {
 let _prefix = ''
 
 export default class Feature extends Model {
-    id!: number;
-    name!: string;
-    type!: FeatureType;
-    description?: string;
-    quantity?: number;
-    created_at!: Date;
-    updated_at!: Date;
+    declare id: number;
+    declare name: string;
+    declare type: FeatureType;
+    declare description?: string;
+    declare quantity?: number;
+    declare created_at: Date;
+    declare updated_at: Date;
 
     protected table: string = _prefix + 'features';
 

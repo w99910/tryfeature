@@ -8,10 +8,10 @@ import Consumption from "./Consumption";
 let _prefix = ''
 
 class User extends Model {
-    id!: number;
-    email!: string;
-    created_at!: Date;
-    updated_at!: Date;
+    declare id: number;
+    declare email: string;
+    declare created_at: Date;
+    declare updated_at: Date;
 
     protected table: string = _prefix + 'users';
     static async migrate(prefix = '', skipOnExist = true) {
@@ -54,11 +54,13 @@ class User extends Model {
                 if (error_on_duplicate && await this.canTry(feature)) {
                     throw new Error('Feature is already granted');
                 }
-                return await (this as User).related('abilities').create({
+                // console.log((this as User).related('abilities'));
+                const ability = await (this as User).related('abilities').create({
                     name: feature.name,
                     expired_at: expire_at,
-                })
-
+                });
+                // console.log(ability);
+                return ability;
             case 'usage':
                 if (!feature.quantity) {
                     throw new Error('Quantity is not defined in this feature');

@@ -8,19 +8,10 @@ export default defineConfig({
     },
     plugins: [],
     build: {
-        // minify: false,
-        // terserOptions: {
-        //     mangle: {
-        //         properties: false, // Prevents class property name changes
-        //     },
-        //     keep_classnames: true, // Keeps class names intact
-        //     keep_fnames: true, // Keeps function names unchanged
-        // },
         lib: {
             entry: path.resolve(__dirname, "src/index.js"), // Your main entry file
             name: "TryFeature", // Global name for UMD builds
-            fileName: (format) => `index.${format === "cjs" ? "cjs" : "js"}`,
-            formats: ["cjs", "esm"], // Export both ESM and CommonJS
+            fileName: 'index'
         },
         rollupOptions: {
             external: [

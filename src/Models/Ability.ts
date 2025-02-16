@@ -2,12 +2,12 @@ import { Model, sutando } from "sutando";
 
 let _prefix = ''
 export default class Ability extends Model {
-    id!: number;
-    name!: string;
-    user_id !: number;
-    expired_at!: Date;
-    created_at!: Date;
-    updated_at!: Date;
+    declare id: number;
+    declare name: string;
+    declare user_id: number;
+    declare expired_at: Date;
+    declare created_at: Date;
+    declare updated_at: Date;
 
     protected table: string = _prefix + 'abilities';
 
