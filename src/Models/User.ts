@@ -181,6 +181,55 @@ class User extends Model {
         }
     }
 
+    async getAvailableFeatures(ability = true, usage = true, include_expire = false) {
+        const date = new Date;
+        const features = [];
+        if (ability) {
+            let query = await (this as User).related('abilities');
+
+            if (!include_expire) {
+                query = query.where('expired_at', '>', date);
+            }
+            const abilities = await query.pluck('name');
+            abilities.each((name) => {
+                features.push({
+                    type: 'ability',
+                    name: name
+                })
+            })
+        }
+
+        if (usage) {
+            const usages: {
+                [key: string]: number
+            } = {};
+            let query = await (this as User).related('usages');
+
+            if (!include_expire) {
+                query = query.where('expired_at', '>', date);
+            }
+            (await query.get()).each((usage) => {
+                if (!usages[usage.name]) {
+                    usages[usage.name] = usage.total - usage.spend;
+                    return;
+                }
+
+                usages[usage.name] += usage.total - usage.spend;
+            })
+
+            for (let name of Object.keys(usages)) {
+                features.push({
+                    type: 'usage',
+                    name: name,
+                    balance: usages[name]
+                })
+            }
+        }
+
+        return features;
+    }
+
+
     async canTry(feature: Feature | string, amount?: number) {
         return await this.try(feature, amount, true);
     }

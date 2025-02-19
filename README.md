@@ -278,6 +278,30 @@ await user.try('api-call', 10); // return boolean
 
 When multiple usage entries exist, those expiring sooner will be prioritized for consumption.
 
+- ### Listing current available features
+
+You can list current available abilities and usages.
+
+```js
+await user.getAvailableFeatures();
+```
+
+The method accepts three parameters:
+- `ability`: true or false to include ability typed features
+- `usage`: true or false to include usage typed features
+- `include_expire`: true or false to include expired features
+
+```js
+// To get only ability typed features
+await user.getAvailableFeatures(true);
+
+// To get only usage typed features
+await user.getAvailableFeatures(false, true);
+
+// To include expired features
+await user.getAvailableFeatures(true, true, true);
+```
+
 ## 📄 License
 
 MIT
